@@ -1,0 +1,49 @@
+
+                  </div>
+               </div>
+            </div>
+            <div class="row d_flex">
+               <div class=" col-md-4">
+                  <div class="latest text_align_center">
+                     <div class="nostrud">
+                         <h3><a href="<?php echo base_url('/mahasiswa/startup')?>">START-UP</a></h3>
+                        <p>Pada bagian ini, anda dapat mengisi : Nama Perusahaan, Visi Perusahaan, Misi Perusahaan, Struktur Organissi, Logo Perusahaan, Tagline Perusahaan                                                                                                                                              </p>
+                     </div>
+                  </div>
+               </div>
+               <div class=" col-md-4">
+                  <div class="latest text_align_center">
+                     <div class="nostrud">
+                        <h3><a href="<?php echo base_url('/mahasiswa/biodatatim')?>">BIODATA TIM</a></h3>
+                        <p>Dalam bagian ini anda dapat mengisi : Biodata Hustler, Biodata Hipster, dan Biodata Hacker                                                                                                                                                                                                     </p>
+                     </div>
+                  </div>
+               </div>
+               <div class=" col-md-4">
+                  <div class="latest text_align_center">
+                     <div class="nostrud">
+                        <h3><a href="<?php echo base_url('/mahasiswa/reviewproduk')?>">REVIEW PRODUK</a></h3>
+                        <p>Dalam bagian ini anda dapat mengisi : Nama Aplikasi, Deskripsi Aplikasi, Logo/Icon Aplikasi, Preview UI Aplikasi, Tahun Pembuatan Aplikasi, Link Video Aplikasi, Link Product, dan Teknologi yang digunakan                                                                                   </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="latest text_align_center">
+                     <div class="nostrud">
+                        <h3><a href="<?php echo base_url('/mahasiswa/paperpitching')?>">PAPER PITCHING</a></h3>
+                        <p>Dalam bagian ini anda dapat mengisi : Latar Belakang Aplikasi, Permasalahan yang ingin diatasi, Solusi yang anda tawarkan, Progress usaha anda, Competitor anda, Target pengguna, Data yang anda gunakan, Proses bisnis aplikasi, Proses mewujudkan aplikasi, dan Kelebihan dari aplikasi anda</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4"> 
+                  <div class="latest text_align_center">
+                     <div class="nostrud">
+                        <h3><a href="<?php echo base_url('/mahasiswa/businessplan')?>">BUSINESS PLAN</a></h3>
+                        <p>Dalam bagian ini anda dapat mengisi Business plan berupa : Customer, Value propositions, Channels, Relationships, Key Activities, Key Resource, Key Parners, Cost Structure, dan Revenue Streams                                                                                               </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+    
+      <!-- end cases -->

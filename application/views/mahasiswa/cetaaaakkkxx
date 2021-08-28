@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <title>Cetak E-Proposal RBTI</title>
+    <style>
+            .text_content{
+                text-indent: 50px;
+                margin-left: 15px;
+                margin-right: 25px;
+                text-align : justify;
+            }
+            .text_content1{
+                text-indent: 50px;
+                padding-left: 15px;
+                padding-right: 25px;
+                text-align : justify;
+            }
+
+            /* .text_content2{
+                text-indent: 30px;
+                padding-left: 75px;
+                padding-right: 80px;
+                text-align : justify;
+                
+                
+            } */
+            
+            /* .text_content3{
+                display: inline;
+                max-width: 100px;
+                text-indent: 50px;
+                padding-left: 75px;
+                padding-right: 80px;
+                margin-left: 75px;
+                margin-right: 80px;
+                text-align : justify;
+            } */
+            
+            p {
+                text-indent: 50px;
+                margin-left: 75px;
+                margin-right: 80px;
+                text-align : justify;
+            }
+            
+            ol li {
+                margin-left: 75px;
+                margin-right: 80px;
+                text-align : justify;
+
+            }
+
+            ul li {
+                margin-left: 75px;
+                margin-right: 80px;
+                text-align : justify;
+
+            }
+
+            .container{
+                max-width: 700px;
+            }
+
+            img {
+                width: 270px;
+                margin-left:220px;
+                margin-right:100px;
+            }
+
+            img.logo {
+                width: 50px;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+        </style>
+
+<head>
+    <!-- <table>
+        <tr>
+            <td>
+                <img class="logo" src="<?php echo './assets/files/'.$c->logo_start_up?>">
+            </td>
+            <td>
+                <center>
+                    <h1>PROPOSAL</h1>
+                    <h1>RANCANGAN BISNIS TI</h1>
+                </center>
+            </td>
+        </tr>
+    </table> -->
+</head>
+
+<body>
+    <?php $baseurl = base_url();?>
+    <?php $no=1; foreach($cetakpro as $c) :  ?>
+    <header>
+        <table>
+            <tr>
+                <td style="position: absolute; left: 0; width: 40%">
+                    <img class="logo" src="<?= $baseurl.'assets/files/'.$c->logo_start_up?>">
+                </td>
+                <td class="text-center" style="position: absolute; right: 0; width: 60%">
+                    <h1>PROPOSAL</h1>
+                    <h1>RANCANGAN BISNIS TI</h1>
+                </td>
+            </tr>
+        </table>
+    </header>
+    <main>
+        <div class="container">
+            <h2 class="text_content1">A. START UP</h2>
+            <h3 class="text_content">Nama Start Up</h3><p class="text_content2"><?php echo strtoupper ($c->nama_start_up); ?></p>
+        
+            <h3 class="text_content">Visi Start Up</h3>
+            <p class="text_content3"><?php echo $c->visi_start_up ?></p>
+
+            <h3 class="text_content">Misi Start Up</h3>
+            <p class="text_content3"><?php echo $c->misi_start_up ?></p>
+
+            <h3 class="text_content">Struktur Start Up</h3>
+            <img src="<?= $baseurl.'/assets/files/'.$c->struktur_start_up?>">
+
+            <h3 class="text_content">Logo Start Up</h3>
+            <img src="<?= $baseurl.'/assets/files/'.$c->logo_start_up?>">
+
+            <h3 class="text_content">Tagline Start Up</h3>
+            <p class="text_content2"><?php echo strtoupper ($c->tagline_start_up) ?></p>
+
+            <br>
+            <br>
+            <br>
+
+            <h2 class="text_content1" class="text_content1">B. BIODATA TIM</h2>
+            <h2 class="text_content1" class="text_content1">1. Hustler</h2>
+            <h3 class="text_content">Nama Hustler</h3>
+            <p class="text_content2"><?php echo strtoupper ($c->nama_hustler); ?></p>
+
+            <h3 class="text_content">Alamat Hustler</h3>
+            <p class="text_content3"><?php echo $c->alamat_hustler ?></p>
+
+            <h3 class="text_content">Telepon Hustler</h3>
+            <p class="text_content2"><?php echo $c->telp_hustler ?></p>
+
+            <h3 class="text_content">E-Mail Hustler</h3>
+            <p class="text_content2"><?php echo $c->email_hustler ?></p>
+
+            <h3 class="text_content">Tugas Hustler</h3>
+            <p class="text_content3"><?php echo $c->tugas_hustler ?></p>
+
+            <br>
+            <h2 class="text_content1" class="text_content1">2. Hipster</h2>
+            <h3 class="text_content">Nama Hipster</h3>
+            <p class="text_content2"><?php echo strtoupper ($c->nama_hipster); ?></p>
+            
+            <h3 class="text_content">Alamat Hipster</h3>
+            <p class="text_content3"><?php echo $c->alamat_hipster ?></p>
+            
+            <h3 class="text_content">Telepon Hipster</h3>
+            <p class="text_content2"><?php echo $c->telp_hipster ?></p>
+
+            <h3 class="text_content">E-Mail Hipster</h3>
+            <p class="text_content2"><?php echo $c->email_hipster ?></p>
+
+            <h3 class="text_content">Tugas Hipster</h3>
+            <p class="text_content3"><?php echo $c->tugas_hipster ?></p>
+
+            <br>
+            <h2 class="text_content1" class="text_content1">3. Hacker</h2>
+            <h3 class="text_content">Nama Hacker</h3>
+            <p class="text_content2"><?php echo strtoupper ($c->nama_hacker); ?></p>
+
+            <h3 class="text_content">Alamat Hacker</h3>
+            <p class="text_content3"><?php echo $c->alamat_hacker ?></p>
+
+            <h3 class="text_content">Telepon Hacker</h3>
+            <p class="text_content2"><?php echo $c->telp_hacker ?></p>
+
+            <h3 class="text_content">E-Mail Hacker</h3>
+            <p class="text_content2"><?php echo $c->email_hacker ?></p>
+
+            <h3 class="text_content">Tugas Hacker</h3
+            ><p class="text_content3"><?php echo $c->tugas_hacker ?></p>
+
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <h2 class="text_content1" class="text_content1">C. REVIEW PRODUK</h2>
+            <h3 class="text_content">Nama Aplikasi</h3><p class="text_content2"><?php echo strtoupper ($c->nama_solusi); ?>>/p>
+            <h3 class="text_content">Deskripsi Aplikasi</h3><p class="text_content3"><?php echo $c->deskripsi_solusi ?></p>
+            <h3 class="text_content">Logo Aplikasi</h3><img src="<?= $baseurl.'/assets/files/'.$c->logo_solusi?>">
+            <h3 class="text_content">Preview UI/UX-1</h3><img src="<?= $baseurl.'/assets/files/'.$c->prev_ui1_solusi?>">
+            <h3 class="text_content">Preview UI/UX-2</h3><img src="<?= $baseurl.'/assets/files/'.$c->prev_ui2_solusi?>">
+            <h3 class="text_content">Preview UI/UX-3</h3><img src="<?= $baseurl.'/assets/files/'.$c->prev_ui3_solusi?>">
+            <h3 class="text_content">Preview UI/UX-4</h3><img src="<?= $baseurl.'/assets/files/'.$c->prev_ui4_solusi?>">
+            <h3 class="text_content">Tahun Pembuatan</h3><p class="text_content2"><?php echo $c->tahun_buat_solusi ?></p>
+            <h3 class="text_content">Link Video Aplikasi</h3><p class="text_content2"><?php echo $c->link_vid_solusi ?></p>
+            <h3 class="text_content">Link Product Aplikasi</h3><p class="text_content2"><?php echo $c->link_prod_solusi ?></p>
+            <h3 class="text_content">Teknologi yang digunakan</h3><p class="text_content2"><?php echo $c->teknologi_solusi ?></p>
+            <br>
+            <br>
+            <br>
+
+            <h2 class="text_content1" class="text_content1">D. PAPER PITCHING</h2>
+            <h3 class="text_content">Ceritakan tentang Latar Belakang anda dan co-founder anda (jika ada)</h3><p class="text_content3"><?php echo $c->latar_belakang_pp ?></p>
+            <h3 class="text_content">Permasalahan apa yang ingin anda atasi melalui usaha anda?</h3><p class="text_content3"><?php echo $c->permasalahan_pp ?></p>
+            <h3 class="text_content">Solusi apa yang anda tawarkan untuk mengatasi masalah tersebut?</h3><p class="text_content3"><?php echo $c->solusi_pp ?></p>
+            <h3 class="text_content">Bagaimana progres/traction usaha anda sejauh ini?</h3><p class="text_content3"><?php echo $c->progres_pp ?></p>
+            <h3 class="text_content">Siapa saja competitor anda saat ini? Sebutkan</h3><p class="text_content3"><?php echo $c->kompetitor_pp ?></p>
+            <h3 class="text_content">Apakah ada usaha/serupa yang sukses? Baik di nasional atau internasional? Sebutkan?</h3><p class="text_content3"><?php echo $c->kompetitor2_pp ?></p>
+            <h3 class="text_content">Siapa target oengguna solusi anda?</h3><p class="text_content3"><?php echo $c->target_pp ?></p>
+            <h3 class="text_content">Data apa yang anda gunakan sehingga anda bisa menuliskan target pengguna dari solusi anda?</h3><p class="text_content3"><?php echo $c->data_pp ?></p>
+            <h3 class="text_content">Bagaimana Proses Bisnis dari aplikasi/solusi yang dibuat? Boleh dengan gambar</h3><p class="text_content"><?php echo $c->proses_bisnis_pp ?></p>
+                                    <img src="<?= $baseurl.'/assets/files/'.$c->proses_bisnis2_pp?>">
+            <h3 class="text_content">Bagaimana proses/tahapan mewujudkan solusi yang akan anda buat?</h3><p class="text_content3"><?php echo $c->tahapan_pp ?></p>
+            <h3 class="text_content">Kelebihan dari solusi/aplikasi yang ditawarkan daripada competitor (jika ada)</h3><p class="text_content3"><?php echo $c->kelebihan_pp ?></p>
+            <br>
+            <br>
+            <br>
+
+            <h2 class="text_content1" class="text_content1">E. BUSINESS PLAN</h2>
+            <h3 class="text_content">Customer</h3><p class="text_content3"><?php echo $c->cust_plan ?></p>
+            <h3 class="text_content">Value Propositions</h3><p class="text_content3"><?php echo $c->value_plan ?></p>
+            <h3 class="text_content">Channels</h3><p class="text_content3"><?php echo $c->channels_plan ?></p>
+            <h3 class="text_content">Relationships</h3><p class="text_content3"><?php echo $c->relation_plan ?></p>
+            <h3 class="text_content">Key Activities</h3><p class="text_content3"><?php echo $c->key_act_plan ?></p>
+            <h3 class="text_content">Key Resource</h3><p class="text_content3"><?php echo $c->key_res_plan ?></p>
+            <h3 class="text_content">Key Partners</h3><p class="text_content3"><?php echo $c->key_partner_plan ?></p>
+            <h3 class="text_content">Cost Structure</h3><p class="text_content3"><?php echo $c->cost_plan ?></p>
+            <h3 class="text_content">Revenue Steams</h3><p class="text_content3"><?php echo $c->revenue_plan ?></p>
+
+            <?php endforeach; ?>
+
+
+        </div>
+</main>
+</body>
+
+</html>
