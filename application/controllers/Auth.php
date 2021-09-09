@@ -120,6 +120,9 @@ class Auth extends CI_Controller {
     {    
         $data['prov'] = $this->admin_model->getProv()->result_array();
         $data['kota'] = $this->admin_model->getKota()->result_array();
+        //$id=$this->input->post('id');
+        //$data=$this->admin_model->getKota($id);
+        //echo json_encode($data);
 
         $this->form_validation->set_rules('uname_user','E-Mail','required|trim|valid_email|is_unique[tb_user.uname_user]',['is_unique'=>'email sudah terdaftar']);
         $this->form_validation->set_rules('pass_user','Password','required|trim|min_length[6]|matches[pass2_user]',['matches'=>'password dont match','min_length'=> 'password min 6 character!']);
@@ -140,21 +143,28 @@ class Auth extends CI_Controller {
             $this->load->view('templates_login/footer');
         }else{
             $this->auth_model->regist_peserta();
-           // $this->_sendemail();
+            $this->_sendemail();
             $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
             Berhasil Registrasi, Silakan Login <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button></div>');
             redirect('auth');
         }
         
+    } 
+
+    public function get_kabupaten()
+    {
+        $id_prov = $this->input->post('id', TRUE);
+        $data = $this->auth_model->get_kabupaten($id_prov)->result();
+        echo json_encode($data);
     }
 
-   /* private function _sendemail(){
+   private function _sendemail(){
             $config = [
                 'protocol' => 'smtp',
                 'smtp_host'=>'ssl://smtp.googlemail.com',
                 'smtp_user'=>'kaylashareta12@gmail.com',
-                'smtp_pass'=>'songmino3003',
+                'smtp_pass'=>'ydjnsvccreshzohc',
                 'smtp_port'=> 465,
                 'mailtype'=>'html',
                 'charset'=>'utf-8',
@@ -176,7 +186,7 @@ class Auth extends CI_Controller {
             }
             
 
-    }*/
+    }
  
 
     public function _rules(){

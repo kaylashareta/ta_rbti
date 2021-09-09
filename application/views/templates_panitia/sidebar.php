@@ -116,8 +116,9 @@
     <div id="collapseSertif" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Daftar Sertifikat</h6>
-            <a class="collapse-item" href="<?php echo base_url('panitia/index_serrtifpanitia')?>">Sertif Panitia</a>
-            <a class="collapse-item" href="<?php echo base_url('panitia/index_sertifpeserta')?>">Sertif Peserta</a>
+            <a class="collapse-item" href="<?php echo base_url('panitia/index_template')?>">Template Sertifikat</a>
+            <a class="collapse-item" href="<?php echo base_url('panitia/index_sertifpanitia')?>">Sertifikat Panitia</a>
+            <a class="collapse-item" href="<?php echo base_url('panitia/index_sertifpeserta')?>">Sertifikat Peserta</a>
         </div>
     </div>
 </li>

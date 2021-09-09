@@ -2,12 +2,12 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <?php if (@$getjoin['status_bayar'] == '1') { ?>
+                    <?php if (@$getjoin['status_bayar'] == 'Berhasil') { ?>
                                         <div class="p-3 mb-2 bg-success text-white">
                                         Pembayaran Berhasil terverifikasi
                                         <span aria-hidden="true"></span>
                                     </div>
-                                    <?php } else if (@$getjoin['status_bayar'] == '2') { ?>
+                                    <?php } else if (@$getjoin['status_bayar'] == 'Bermasalah') { ?>
                                         <div class="p-3 mb-2 bg-danger text-white">
                                         Pembayaran Belum Dapat di verifikasi, silakan menghubungi panitia untuk pengecekan lebih lanjut
                                         <span aria-hidden="true"></span>

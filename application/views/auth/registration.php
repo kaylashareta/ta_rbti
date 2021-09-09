@@ -47,19 +47,17 @@
                                 </div>
                                 <div class="form-group row col-md-12">
                                 <div class="form-group col-md-6">
-                                        <select class="form-control form-control-user" id="prov_peserta" placeholder="Asal Provinsi" name="prov_peserta">
+                                        <select class="form-control form-control-user lokasi" id="prov_peserta" placeholder="Asal Provinsi" name="prov_peserta">
                                         <option disabled selected>---Asal Provinsi---</option>
                                         <?php foreach ($prov as $row) : ?>
-                                        <option value="<?= $row['prov'];?>"><?= $row['prov'];?></option>
+                                        <option value="<?= $row['id_prov'];?>"><?= $row['prov'];?></option>
                                         <?php endforeach; ?>
                                         </select> 
                                 </div>   
                                 <div class="form-group col-md-6">
-                                        <select class="form-control form-control-user" id="kota_peserta" placeholder="Asal Kota" name="kota_peserta">
+                                        <select class="form-control form-control-user lokasi" id="kota_peserta" placeholder="Asal Kota" name="kota_peserta">
                                         <option disabled selected>---Asal Kota---</option>
-                                        <?php foreach ($kota as $row) : ?>
-                                        <option value="<?= $row['kota'];?>"><?= $row['kota'];?></option>
-                                        <?php endforeach; ?>
+                                       
                                         </select> 
                                 </div>   
                                 </div>
@@ -94,11 +92,37 @@
     </div>
         <script type="text/javascript">
         $(document).ready(function() {
-            $('#prov_peserta').select2();
+            $('.lokasi').select2();
         });
         </script>
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
         $(document).ready(function() {
             $('#kota_peserta').select2();
         });
-        </script>
+        </script> -->
+
+<script type="text/javascript">
+                $(document).ready(function() {
+                    $('#prov_peserta').change(function() {
+                        var id = $(this).val();
+                        $.ajax({
+                            url: "<?php echo site_url('Auth/get_kabupaten'); ?>",
+                            method: "POST",
+                            data: {
+                                id: id
+                            },
+                            async: true,
+                            dataType: 'json',
+                            success: function(data) {
+                                var html = '';
+                                var i;
+                                for (i = 0; i < data.length; i++) {
+                                    html += '<option value=' + data[i].id_kota + '>' + data[i].kota + '</option>';
+                                }
+                                $('#kota_peserta').html(html);
+                            }
+                        });
+                        return false;
+                    });
+                });
+            </script>

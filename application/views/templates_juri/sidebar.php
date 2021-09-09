@@ -36,6 +36,22 @@
 </li>
 <!-- Divider -->
 <hr class="sidebar-divider">
+
+
+<!-- Heading -->
+<div class="sidebar-heading">
+    Klasemen Nilai
+</div>
+<!-- Nav Item - Utilities Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="<?php echo base_url('juri/index_klasemen')?>" data-toggle="#" data-target="#"
+        aria-expanded="true" aria-controls="collapseUtilities">
+        <i class="fas fa-file fa-file"></i>
+        <span>Klasemen Nilai</span>
+</a>
+</li>
+<!-- Divider -->
+<hr class="sidebar-divider">
  
 <!-- Heading -->
 

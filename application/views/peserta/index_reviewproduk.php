@@ -48,7 +48,7 @@
                                                 <button type="button" class="btn btn-primary fa fa-eye" data-toggle="modal" data-target="#ui1Modal"></button>
                                                 <br>
                                                 <small>Update Gambar : </small><br>
-                                                <input type="file" name="prev_ui1_solosi" accept="image/*"  class="form-control-file" id="exampleFormControlFile1">
+                                                <input type="file" name="prev_ui1_solusi" accept="image/*"  class="form-control-file" id="exampleFormControlFile1">
                                             </div>
                                         </div>
 
@@ -59,7 +59,7 @@
                                                 <button type="button" class="btn btn-primary fa fa-eye" data-toggle="modal" data-target="#ui2Modal"></button>
                                                 <br>
                                                 <small>Update Gambar : </small><br>
-                                                <input type="file" name="prev_ui2_solosi" accept="image/*"  class="form-control-file" id="exampleFormControlFile1">
+                                                <input type="file" name="prev_ui2_solusi" accept="image/*"  class="form-control-file" id="exampleFormControlFile1">
                                             </div>
 
                                             <div class="form-group col-sm-5">
@@ -68,7 +68,7 @@
                                                 <button type="button" class="btn btn-primary fa fa-eye" data-toggle="modal" data-target="#ui3Modal"></button>
                                                 <br>
                                                 <small>Update Gambar : </small><br>
-                                                <input type="file" name="prev_ui3_solosi" accept="image/*"  class="form-control-file" id="exampleFormControlFile1">
+                                                <input type="file" name="prev_ui3_solusi" accept="image/*"  class="form-control-file" id="exampleFormControlFile1">
                                             </div>
                                         </div>
 
@@ -79,7 +79,7 @@
                                                 <button type="button" class="btn btn-primary fa fa-eye" data-toggle="modal" data-target="#ui4Modal"></button>
                                                 <br>
                                                 <small>Update Gambar : </small><br>
-                                                <input type="file" name="prev_ui4_solosi" accept="image/*"  class="form-control-file" id="exampleFormControlFile1">
+                                                <input type="file" name="prev_ui4_solusi" accept="image/*"  class="form-control-file" id="exampleFormControlFile1">
                                             </div>
 
                                             <div class="form-group col-sm-5">
@@ -215,7 +215,7 @@
                               </div>
                               <div class="modal-body">
                               <img src="<?php echo base_url().'assets/files/'.@$getreviewproduk['prev_ui4_solusi'];?>" class="img-thumbnail" width="450px">
-                        
+                         
                               </div>
                               <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

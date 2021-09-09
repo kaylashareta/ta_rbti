@@ -30,12 +30,25 @@
 
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?php echo base_url('assets/') ?>css/sb-admin-2.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="jquery.mobile-1.4.5.min.css" />
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="jquery.mobile-1.4.5.min.js"></script>
+    <link href="<?php echo base_url()?>assets/css/stepper.css" rel="stylesheet">
+
+    <link href="path/to/lightbox.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <script src="<?php echo base_url()?>/assets/chart/Chart.js"></script>
+    
+ 
 
 
 </head>
 
 <body id="page-top">
-
+<script src="path/to/lightbox.js"></script>
+<script src="<?php echo base_url()?>assets/vendor/ckeditor/ckeditor.js"></script>
     <!-- Page Wrapper -->
     <div id="wrapper">

@@ -13,7 +13,7 @@
                 <input type="hidden" name="nim_mhs"  class="form-control" value="<?php echo $this->session->uname_user ?>">
                 <input type="hidden" name="datepro"  class="form-control" value="<?php echo date("Y-m-d") ?>">
             
-            </div>
+             </div>
             <div class="form-group col-md-6 ">
                 <label><h4>JUDUL PROPOSAL</h4></label>
                 <input type="text"  name="judul_proposal" placeholder="Masukkan Judul Proposal Anda" style="text-transform:uppercase" class="form-control">

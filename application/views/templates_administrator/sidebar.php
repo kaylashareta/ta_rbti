@@ -68,8 +68,8 @@
             <a class="collapse-item" href="<?php echo base_url('administrator/index_kriteria')?>">Kriteria Penilaian</a>
             <a class="collapse-item" href="<?php echo base_url('administrator/index_artikel')?>">Artikel</a>
             <a class="collapse-item" href="<?php echo base_url('administrator/index_hakakses')?>">Hak Akses</a>
-            <a class="collapse-item" href="<?php echo base_url('administrator/index_provinsi')?>">Provinsi</a>
-            <a class="collapse-item" href="<?php echo base_url('administrator/index_kota')?>">Kabupaten/Kota</a>
+            <!-- <a class="collapse-item" href="<?php echo base_url('administrator/index_provinsi')?>">Provinsi</a>
+            <a class="collapse-item" href="<?php echo base_url('administrator/index_kota')?>">Kabupaten/Kota</a> -->
             
         </div>
     </div>

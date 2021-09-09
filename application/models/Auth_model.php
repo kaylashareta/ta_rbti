@@ -29,7 +29,7 @@ class Auth_model extends CI_Model{
         ];
         $this->db->insert('tb_peserta',$data);
 
-    }
+    } 
 
     public function getProv(){
 
@@ -40,12 +40,19 @@ class Auth_model extends CI_Model{
         return $query;
     }
 
-    public function getKota(){
-
+    // public function getKota($id){
+    //     $hasil=$this->db->query("SELECT * FROM tb_provinsi WHERE id_prov='$id'");
+    //     return $hasil->result();
         /*$this->db->select('');
         $this->db->from('tb_tema');*/
-        $query = $this->db->get('tb_kota');
+        //$query = $this->db->get('tb_kota');
         
+       // return $query;
+    //}
+
+    public function get_kabupaten($id_prov)
+    {
+        $query = $this->db->get_where('tb_kota', array('id_prov' => $id_prov));
         return $query;
     }
 

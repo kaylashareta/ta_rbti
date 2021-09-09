@@ -22,16 +22,21 @@
                                    <label><h6>Judul Proposal Start-Up : </h6></label>
                                    <br>
                                    <input type="text" class="form-control form-control-user" id="judul_proposal" 
-                                       name="judul_proposal" placeholder="Masukkan Judul Proposal Start-Up Anda" style="text-transform:capitalize" >
+                                       name="judul_proposal" placeholder="Masukkan Judul Proposal Start-Up Anda" style="text-transform:uppercase" >
                                        <?=form_error('judul_proposal','<small class="text-danger pl-3">','</small>');?>
                                    </div>
 
-                                   <div class="form-group col-sm-11">
-                                   <label><h6>Tema Proposal : </h6></label>
-                                       <input type="text" class="form-control form-control-user" id="tema_proposal" 
-                                       name="tema_proposal" placeholder="tema proposal" style="text-transform:capitalize"  >
-                                       <?=form_error('tema_proposal','<small class="text-danger pl-3">','</small>');?>
-                                   </div>
+                                   <div class="form-group col-md-6 ">
+                                        <label><h4>TEMA PROPOSAL</h4></label>
+                                        <br>
+                                        <select name="tema_proposal">
+                                        <option disabled selected>---Pilih Tema Proposal---</option>
+                                        <?php foreach ($tema as $row) : ?>
+                                        <option value="<?= $row['tema_proposal'];?>"><?= $row['tema_proposal'];?></option>
+                                        <?php endforeach; ?>
+                                        <?=form_error('tema_proposal','<small class="text-danger pl-3">','</small>');?>
+                                        </select>
+                                    </div>
                                  
                                <input type="hidden" name="date_added"  class="form-control" value="<?php echo date("Y-m-d") ?>">
                                

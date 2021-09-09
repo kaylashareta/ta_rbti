@@ -50,11 +50,11 @@
                                                          <tr>
                                                              <td width="20px"><?php echo $no++ ?></td>
                                                              <td width="100px"><?php echo $adm->uname_user?></td>
-                                                             <td width="400px"><?php echo $adm->judul_proposal?></td>
+                                                             <td width="600px"><?php echo $adm->judul_proposal?></td>
                                                              <td width="400px"><?php echo $adm->tema_proposal?></td>
-                                                             <td width="400px"><?php echo $adm->date_finalisasi?></td>
-                                                             <td width="20px"><!--<img src="<?php echo base_url().'assets/files/'.$adm->bukti_transfer?>">--></td>
-                                                          
+                                                             <td width="300px"><?php echo $adm->date_finalisasi?></td> 
+                                                             <td width="20px"><?php echo anchor('panitia/detail_proposal/'.$adm->id_proposal,'<div class="badge badge-primary">
+                                                             <i class="fa fa-eye"> Detail Proposal </i></div>') ?></td>  
                                                            
                                                          </tr>
                                                          <?php endforeach; ?>
@@ -85,9 +85,10 @@
                                                          <tr>
                                                          <td width="20px"><?php echo $no++ ?></td>
                                                              <td width="100px"><?php echo $adm->uname_user?></td>
-                                                             <td width="400px"><?php echo $adm->judul_proposal?></td>
-                                                             <td width="400px"><?php echo $adm->tema_proposal?></td>
-                                                            <td width="20px"><!--<img src="<?php echo base_url().'assets/files/'.$adm->bukti_transfer?>">--></td>
+                                                             <td width="600px"><?php echo $adm->judul_proposal?></td>
+                                                             <td width="200px"><?php echo $adm->tema_proposal?></td>
+                                                             <td width="20px"><?php echo anchor('panitia/detail_belumfinalisasi/'.$adm->id_proposal,'<div class="badge badge-primary" >
+                                                             <i class="fa fa-eye"> Lihat Proposal </i></div>') ?></td>  
                                                           
                                                          </tr>
                                                          <?php endforeach; ?>

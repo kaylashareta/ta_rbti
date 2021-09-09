@@ -37,9 +37,9 @@
                                                          <tr>
                                                          <th>NO</th>
                                                          <th>E-Mail Peserta</th>
-                                                         <th>Bank Transfer</th>
+                                                         <th>Bank</th>
                                                          <th>Tanggal Transfer</th>
-                                                         <th>Jumlah Transfer</th>
+                                                         <th>Nominal</th>
                                                          <th>Detail</th>
                                                          <th>Diterima</th>
                                                          <th >Bermasalah</th>
@@ -52,10 +52,11 @@
                                                          <tr>
                                                              <td width="20px"><?php echo $no++ ?></td>
                                                              <td width="100px"><?php echo $adm->uname_user?></td>
-                                                             <td width="400px"><?php echo $adm->rek_transfer?></td>
-                                                             <td width="400px"><?php echo $adm->tanggal_bayar?></td>
-                                                             <td width="400px"><?php echo $adm->jumlah_bayar?></td>
-                                                             <td width="20px"><!--<img src="<?php echo base_url().'assets/files/'.$adm->bukti_transfer?>">--></td>
+                                                             <td width="100px"><?php echo $adm->rek_transfer?></td>
+                                                             <td width="200px"><?php echo $adm->tanggal_bayar?></td>
+                                                             <td width="200px"><?php echo $adm->jumlah_bayar?></td>
+                                                             <td width="20px"><?php echo anchor('panitia/detailbayar/'.$adm->id_user,'<div class="badge badge-primary">
+                                                             <i class=""> Bukti Pembayaran</i></div>') ?></td>
                                                              <td width="20px"><?php echo anchor('panitia/verifberhasil/'.$adm->id_user,'<div class="badge badge-success">
                                                              <i class="fa fa-check"> Berhasil</i></div>') ?></td>
                                                              <td width="20px"><?php echo anchor('panitia/verifbermasalah/'.$adm->id_user,'<div class="badge badge-danger">
@@ -92,12 +93,16 @@
                                                          <tr>
                                                              <td width="20px"><?php echo $no++ ?></td>
                                                              <td width="100px"><?php echo $adm->uname_user?></td>
-                                                             <td width="400px"><?php echo $adm->rek_transfer?></td>
-                                                             <td width="400px"><?php echo $adm->tanggal_bayar?></td>
-                                                             <td width="400px"><?php echo $adm->jumlah_bayar?></td>
-                                                             <td width="400px"><?php echo $adm->nama_transfer?></td>
-                                                             <td width="20px"><!--<img src="<?php echo base_url().'assets/files/'.$adm->bukti_transfer?>">--></td>
-                                                       
+                                                             <td width="100px"><?php echo $adm->rek_transfer?></td>
+                                                             <td width="300px"><?php echo $adm->tanggal_bayar?></td>
+                                                             <td width="200px"><?php echo $adm->jumlah_bayar?></td>
+                                                             <td width="600px"><?php echo $adm->nama_transfer?></td>
+                                                             <td width="20px">
+                                                                <a href="<?php echo base_url().'assets/files/'.$adm->bukti_transfer?>" data-lightbox="image-1" target="_blank" data-title="My caption">
+                                                                 <img src="<?php echo base_url().'assets/files/'.$adm->bukti_transfer?>" width="50" height=50>
+                                                                </a>
+                                                            </td>
+                                                        
                                                          </tr>
                                                          <?php endforeach; ?>
                                                      </tbody>
@@ -123,6 +128,14 @@
                         $('#dataTable2').DataTable();
                     });
                 </script>
+
+                <script>
+                    lightbox.option({
+                    'resizeDuration': 200,
+                    'wrapAround': true
+                    })
+                </script>
+
 
                       
 

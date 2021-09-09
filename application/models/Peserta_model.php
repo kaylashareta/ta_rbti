@@ -46,7 +46,7 @@ class Peserta_model extends CI_Model{
             'id_user' => $id_user
         ]);
         return $query;
-    } 
+    }  
 
     public function getProposal($id_user) //mengambil 1 
     {
@@ -114,7 +114,15 @@ class Peserta_model extends CI_Model{
         return $query;
     }
 
-   
+    public function getTema(){
+
+        /*$this->db->select('');
+        $this->db->from('tb_tema');*/
+        $query = $this->db->get('tb_tema');
+        
+        return $query;
+    }
+
     public function tambah_pembayaran()
     {
         $data1 = [
@@ -136,8 +144,8 @@ class Peserta_model extends CI_Model{
             'id_user'        => $this->session->id_user,
             'judul_proposal' =>strtoupper($this->input->post('judul_proposal')),
             'tema_proposal'  => $this->input->post('tema_proposal'),
-            'date_added'     => $this->input->post('date_added'),
-            'finalisasi'     => 0,
+            'date_added'     => date("Y-m-d"),
+            'finalisasi'     => 'Belum Finalisasi',
         ]; 
         $this->db->insert('tb_master_proposal',$data1);
 
@@ -185,7 +193,7 @@ class Peserta_model extends CI_Model{
             'email_hacker'  => $this->input->post('email_hacker'),
             'tugas_hacker'  => $this->input->post('tugas_hacker'),
             'date_added'    => $this->input->post('date_added'),
-            'finalisasi'    => 0,
+            'finalisasi'    => 'Belum Finalisasi',
         ]; 
         $this->db->insert('tb_biodatatim',$data1);
 
@@ -206,7 +214,7 @@ class Peserta_model extends CI_Model{
             'cost_plan'         =>$this->input->post('cost_plan'),
             'revenue_plan'      =>$this->input->post('revenue_plan'),
             'date_added'        => $this->input->post('date_added'),
-            'finalisasi'        => 0,
+            'finalisasi'        => 'Belum Finalisasi',
         ]; 
         $this->db->insert('tb_plan',$data1);
 
@@ -214,44 +222,44 @@ class Peserta_model extends CI_Model{
 
     public function finalisasiproposal($id)
     {
-        $this->db->set('aktif', '1');
+        $this->db->set('aktif', 'Finalisasi');
         $this->db->where('id_user', $id);
         $this->db->update('tb_user');
     }
 
     public function finalisasi($id_proposal)
     {
-        $this->db->set('a.finalisasi', 1);
+        $this->db->set('a.finalisasi', 'Finalisasi');
         $this->db->set('a.date_finalisasi', date("Y-m-d"));
         $this->db->where('a.id_user',  $this->session->id_user);
         $this->db->update('tb_start_up as a');
         // second
-        $this->db->set('b.finalisasi', 1);
+        $this->db->set('b.finalisasi', 'Finalisasi');
         $this->db->set('b.date_finalisasi', date("Y-m-d"));
         $this->db->where('b.id_user',  $this->session->id_user);
         $this->db->update('tb_biodatatim as b');
 
-        $this->db->set('c.finalisasi', 1);
+        $this->db->set('c.finalisasi', 'Finalisasi');
         $this->db->set('c.date_finalisasi', date("Y-m-d"));
         $this->db->where('c.id_user',  $this->session->id_user);
         $this->db->update('tb_solusi as c');
 
-        $this->db->set('d.finalisasi', 1);
+        $this->db->set('d.finalisasi', 'Finalisasi');
         $this->db->set('d.date_finalisasi', date("Y-m-d"));
         $this->db->where('d.id_user',  $this->session->id_user);
         $this->db->update('tb_paper_pitching as d');
 
-        $this->db->set('e.finalisasi', 1);
+        $this->db->set('e.finalisasi', 'Finalisasi');
         $this->db->set('e.date_finalisasi', date("Y-m-d"));
         $this->db->where('e.id_user',  $this->session->id_user);
         $this->db->update('tb_plan as e');
         
-        $this->db->set('f.finalisasi', 1);
+        $this->db->set('f.finalisasi', 'Finalisasi');
         $this->db->set('f.date_finalisasi', date("Y-m-d"));
         $this->db->where('f.id_user',  $this->session->id_user);
         $this->db->update('tb_pitchd as f');
 
-        $this->db->set('g.finalisasi', 1);
+        $this->db->set('g.finalisasi', 'Finalisasi');
         $this->db->set('g.date_finalisasi', date("Y-m-d"));
         $this->db->where('g.id_user',  $this->session->id_user);
         $this->db->update('tb_master_proposal as g');
@@ -274,7 +282,7 @@ class Peserta_model extends CI_Model{
 
     public function tambah_paperpitching($data){
         $this->db->insert('tb_paper_pitching',$data);
-    }
+    } 
 
     public function tambah_pitchdesk($data){
         $this->db->insert('tb_pitchd',$data);
@@ -283,7 +291,7 @@ class Peserta_model extends CI_Model{
     public function edit_data($where,$table){
       return $this->db->get_where($table,$where);
 
-    }
+    } 
 
     public function update_data($where,$data,$table){
       $this->db->where($where);

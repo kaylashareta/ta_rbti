@@ -43,7 +43,8 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top">  
+<script src="path/to/lightbox.js"></script>
 
     <!-- Page Wrapper -->
-    <div id="wrapper">
+    <div id="wrapper"> 

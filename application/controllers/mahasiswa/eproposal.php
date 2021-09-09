@@ -26,7 +26,7 @@ class Eproposal extends CI_Controller {
         $this->load->view('mahasiswa/eproposal', $data);
         $this->load->view('templates_mahasiswa/footer');
     }
-
+ 
     public function input()
     {
         $data['halaman'] = "Halaman Tambah Judul Proposal";

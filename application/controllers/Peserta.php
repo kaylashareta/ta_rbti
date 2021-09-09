@@ -16,14 +16,47 @@ class Peserta extends CI_Controller {
             redirect('auth');
         }
 
-    }
+    } 
   
     public function index(){
         $id_user=$this->session->userdata('id_user');
+        $id_proposal=$this->session->userdata('id_proposal');
         $data['title']='SI-RBTI Dashboard Peserta';
         $data['user'] = $this->db->get_where('tb_user',['uname_user' => $this->session->userdata('uname_user')])->row_array();
         $data['getbayar'] = $this->peserta_model->get_pembayaran();
         $data['getjoin'] = $this->peserta_model->getIdVerif2($id_user)->row_array();
+        $data['getjudul'] = $this->peserta_model->getJudul($id_user)->row_array();
+        $data['startup'] = $this->peserta_model->getStartup($id_user)->row_array();
+		$data['tim'] = $this->peserta_model->getBiodatatim($id_user)->row_array();
+		$data['reviewproduk'] = $this->peserta_model->getReviewproduk($id_user)->row_array();
+		$data['paperpitching'] = $this->peserta_model->getPaperpitching($id_user)->row_array();
+		$data['bisnisplan'] = $this->peserta_model->getBisnisplan($id_user)->row_array();
+		$data['pitchdesk'] = $this->peserta_model->getPitchdesk($id_user)->row_array();
+
+        $data['step1']=0;
+        $data['step2']=0;
+        $data['step3']=0;
+        $data['step4']=0;
+        $data['step5']=0;
+        $data['step6']=0;
+        if($data['startup']){
+            $data['step1']=1;
+        }
+        if($data['tim']){
+            $data['step2']=1;
+        }
+        if($data['reviewproduk']){
+            $data['step3']=1;
+        }
+        if ($data['paperpitching']){
+            $data['step4']=1;
+        }
+        if($data['bisnisplan']){
+            $data['step5']=1;
+        }
+        if ($data['pitchdesk']){
+            $data['step6']=1;
+        }
       
         
         $this->load->view('templates_peserta/header', $data);
@@ -33,6 +66,7 @@ class Peserta extends CI_Controller {
         $this->load->view('templates_peserta/footer');
      
     }
+    
 
     public function index_pembayaran(){
         $id_user=$this->session->userdata('id_user');
@@ -52,6 +86,7 @@ class Peserta extends CI_Controller {
         }
         
     }
+
     
     public function tambah_pembayaran(){
         $id_user=$this->session->userdata('id_user');
@@ -93,7 +128,7 @@ class Peserta extends CI_Controller {
                         $bukti_transfer=$this->upload->data('file_name');
                     }
                 }
-                $status_bayar = 0;
+                $status_bayar = $this->input->post('status_bayar');
                 $date_added = $this->input->post('date_added');
                 
                 $data=array(
@@ -104,8 +139,8 @@ class Peserta extends CI_Controller {
                     'rek_transfer'    =>$rek_transfer,
                     'nama_transfer'    =>$nama_transfer,
                     'bukti_transfer'    =>$bukti_transfer,
-                    'status_bayar'=>$status_bayar,
-                    'date_added'    =>$date_added,
+                    'status_bayar'=>'Belum Verifikasi',
+                    'date_added'    =>date("Y-m-d"),
               
                     );
 
@@ -121,10 +156,18 @@ class Peserta extends CI_Controller {
 
     public function index_proposal(){
         $id_user=$this->session->userdata('id_user');
+        //$this->session->set_userdata('id_proposal', $id_proposal);
+        //$id_proposal=$this->session->userdata('id_proposal');
         $data['title']='SI-RBTI Judul Proposal';
         $data['user'] = $this->db->get_where('tb_user',['id_user' => $this->session->userdata('id_user')])->row_array();
         $data['getjoin'] = $this->peserta_model->getIdVerif2($id_user)->row_array();
         $data['getjudul'] = $this->peserta_model->getJudul($id_user)->row_array();
+        $data['getstartup'] = $this->peserta_model->getStartup($id_user)->row_array();
+        $data['getbiodatatim'] = $this->peserta_model->getBiodatatim($id_user)->row_array();
+        $data['getreviewproduk'] = $this->peserta_model->getReviewproduk($id_user)->row_array();
+        $data['getpaperpitching'] = $this->peserta_model->getPaperpitching($id_user)->row_array();
+        $data['getbisnisplan'] = $this->peserta_model->getbisnisplan($id_user)->row_array();
+        $data['getpitchdesk'] = $this->peserta_model->getPitchdesk($id_user)->row_array();
         
         if(!$data['getjudul']){
             redirect('peserta/tambah_judulproposal');
@@ -152,6 +195,7 @@ class Peserta extends CI_Controller {
         $data['user'] = $this->db->get_where('tb_user',['id_user' => $this->session->userdata('id_user')])->row_array();
         $data['getjoin'] = $this->peserta_model->getIdVerif2($id_user)->row_array();
         $data['getjudul'] = $this->peserta_model->getJudul($id_user)->row_array();
+        $data['tema'] = $this->peserta_model->getTema()->result_array();
 
         $this->form_validation->set_rules('judul_proposal','Judul','required|trim');
         $this->form_validation->set_rules('tema_proposal','Tema','required|trim');
@@ -168,7 +212,7 @@ class Peserta extends CI_Controller {
             $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
             Data Berhasil Ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button></div>');
-            redirect('peserta/index_proposal');
+            redirect('peserta/index_proposal/'.$id_proposal,$data);
         }
       
     }
@@ -186,7 +230,7 @@ class Peserta extends CI_Controller {
 
             $data=array(
                 'judul_proposal'    =>$judul_proposal,
-                'date_updated'      =>$date_updated,
+                'date_updated'      =>date("Y-m-d"),
                 
             );
 
@@ -200,7 +244,7 @@ class Peserta extends CI_Controller {
             $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
             Data Berhasil Diedit <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button></div>');
-            redirect('peserta/index_judulproposal/', $data);
+            redirect('peserta/index_proposal/', $data);
         
       
     }
@@ -235,6 +279,7 @@ class Peserta extends CI_Controller {
 
     public function tambah_startup(){
         $id_user=$this->session->userdata('id_user');
+       // $id_proposal=$this->session->userdata('id_proposal');
         $data['title']='SI-RBTI Tambah Startup';
         $data['user'] = $this->db->get_where('tb_user',['id_user' => $this->session->userdata('id_user')])->row_array();
         $data['getjoin'] = $this->peserta_model->getIdVerif2($id_user)->row_array();
@@ -264,6 +309,7 @@ class Peserta extends CI_Controller {
                         $config['upload_path']      ='./assets/files';
                         $config['allowed_types']    ='jpg|jpeg|png|tiff';
                         $config['max_size']         = 2073; 
+                        $config['file_name'] = 'Struktur-'.time();
                         $this->load->library('upload',$config);
                         if(!$this->upload->do_upload('struktur_su')){
                             echo "photo gagal diupload!";
@@ -277,20 +323,22 @@ class Peserta extends CI_Controller {
                         $config['upload_path']      ='./assets/files';
                         $config['allowed_types']    ='jpg|jpeg|png|tiff';
                         $config['max_size']         = 2073; 
+                        $config['file_name']        = 'logo-'.time();
                         $this->load->library('upload',$config);
                         if(!$this->upload->do_upload('logo_su')){
                             echo "photo gagal diupload!";
                         }else{
                             $logo_su=$this->upload->data('file_name');
                         }}
-
+ 
                 $tagline_su =strtoupper($this->input->post('tagline_su'));
                 $date_added = $this->input->post('date_added');
+                $finalisasi = $this->input->post('finalisasi');
      
 
                 $data=array(
                 'id_user'    =>$id_user,
-                'id_proposal'    =>$id_proposal,
+                'id_proposal' =>$id_proposal,
                 'nama_su'    =>$nama_su,
                 'visi_su'    =>$visi_su,
                 'misi_su'    =>$misi_su,
@@ -298,6 +346,7 @@ class Peserta extends CI_Controller {
                 'logo_su'    =>$logo_su,
                 'tagline_su' =>$tagline_su,
                 'date_added' => date("Y-m-d"),
+                'finalisasi' => 'Belum Finalisasi',
 
                 );
 
@@ -305,7 +354,7 @@ class Peserta extends CI_Controller {
             $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
             Data Berhasil Ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button></div>');
-            redirect('peserta/index_startup/'.$this->session->id_proposal);
+            redirect('peserta/index_proposal/'.$id_proposal,$data);
         }
       
     }
@@ -327,7 +376,7 @@ class Peserta extends CI_Controller {
             $this->load->view('templates_peserta/header', $data);
             $this->load->view('templates_peserta/sidebar', $data);
             $this->load->view('templates_peserta/topbar', $data);
-            $this->load->view("peserta/index_startup/$id_proposal", $data);
+            $this->load->view('peserta/index_startup', $data);
             $this->load->view('templates_peserta/footer');
             
         }else{
@@ -341,14 +390,18 @@ class Peserta extends CI_Controller {
                         $config['upload_path']      ='./assets/files';
                         $config['allowed_types']    ='jpg|jpeg|png|tiff';
                         $config['max_size']         = 2073; 
+                        $config['file_name'] = 'Struktur-'.time();
                         $this->load->library('upload',$config);
                         if(!$this->upload->do_upload('struktur_su')){
                             echo "photo gagal diupload!";
                         }else{
+                           
                             $struktur_su=$this->upload->data('file_name');
                         }
                     }
-                if(!empty($_FILES["logo_su"]["name"])){
+                
+                $logo_su    =$_FILES['logo_su']['name'];
+                    if($logo_su!=''){
                         $config['upload_path']      ='./assets/files';
                         $config['allowed_types']    ='jpg|jpeg|png|tiff';
                         $config['max_size']         = 2073; 
@@ -357,11 +410,7 @@ class Peserta extends CI_Controller {
                             echo "photo gagal diupload!";
                         }else{
                             $logo_su=$this->upload->data('file_name');
-                        }
-                }else{
-                    $this->image = $post["old_image"];
-                }
-                   
+                        }}
 
                 $tagline_su   =strtoupper($this->input->post('tagline_su'));
                 $date_updated = $this->input->post('date_updated');
@@ -374,12 +423,13 @@ class Peserta extends CI_Controller {
                 'struktur_su'=>$struktur_su,
                 'logo_su'    =>$logo_su,
                 'tagline_su' =>$tagline_su,
-                'date_updated'=>$date_updated,
+                'date_updated'=>date("Y-m-d"),
 
         );
 
         $where=array(
-            'id_proposal'=>$id_proposal,
+            'id_user'=>$id_user,
+         
             
         );
 
@@ -387,7 +437,7 @@ class Peserta extends CI_Controller {
         $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
         Data Berhasil Diedit <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span></button></div>');
-        redirect("peserta/index_startup/".$id_proposal);
+        redirect('peserta/index_proposal/',$data);
         }
     }
 
@@ -445,7 +495,7 @@ class Peserta extends CI_Controller {
             $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
             Data Berhasil Ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button></div>');
-            redirect('peserta/index_biodatatim/'.$this->session->id_proposal);
+            redirect('peserta/index_proposal/'.$id_proposal,$data);
         }
       
     }
@@ -525,14 +575,14 @@ class Peserta extends CI_Controller {
 
         $where=array(
             'id_user'=>$id_user,
-            'id_proposal'=>$id_proposal,
+            
         );
 
         $this->peserta_model->update_data($where,$data,'tb_biodatatim');
         $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
         Data Berhasil Diedit <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span></button></div>');
-        redirect('peserta/index_biodatatim/'.$id_proposal);
+        redirect('peserta/index_proposal/',$data);
         }
     }
 
@@ -657,6 +707,7 @@ class Peserta extends CI_Controller {
                 $link_prod_solusi        =$this->input->post('link_prod_solusi');
                 $teknologi_solusi        =$this->input->post('teknologi_solusi');
                 $date_added              =$this->input->post('date_added');
+                $finalisasi              =$this->input->post('finalisasi');
 
 
                 $data=array(
@@ -673,7 +724,8 @@ class Peserta extends CI_Controller {
                 'link_vid_solusi'       =>$link_vid_solusi,
                 'link_prod_solusi'      =>$link_prod_solusi,
                 'teknologi_solusi'      =>$teknologi_solusi,
-                'date_added'            =>$date_added,
+                'date_added'            =>date("Y-m-d"),
+                'finalisasi'            =>'Belum Finalisasi',
                 
 
             );
@@ -682,12 +734,13 @@ class Peserta extends CI_Controller {
             $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
             Data Berhasil Ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button></div>');
-            redirect('peserta/index_reviewproduk/'.$this->session->id_proposal);
+            redirect('peserta/index_proposal/',$data);
         }
     }
 
     public function edit_reviewproduk(){
         $id_user=$this->session->userdata('id_user');
+        $id_proposal=$this->session->userdata('id_proposal');
         $data['title']='SI-RBTI Review Produk';
         $data['user'] = $this->db->get_where('tb_user',['id_user' => $this->session->userdata('id_user')])->row_array();
         $data['getjoin'] = $this->peserta_model->getIdVerif2($id_user)->row_array();
@@ -806,13 +859,14 @@ class Peserta extends CI_Controller {
 
                 $where=array(
                     'id_user'=>$id_user,
+                  
                 );
 
         $this->peserta_model->update_data($where,$data,'tb_solusi');
         $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
         Data Berhasil Diedit <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span></button></div>');
-        redirect('peserta/index_reviewproduk/', $data);
+        redirect('peserta/index_proposal/'.$id_proposal, $data);
         }
     }
 
@@ -838,6 +892,7 @@ class Peserta extends CI_Controller {
 
     public function tambah_paperpitching(){
         $id_user=$this->session->userdata('id_user');
+        $uname_user=$this->session->userdata('uname_user');
         $data['title']='SI-RBTI Tambah Paper Pitching';
         $data['user'] = $this->db->get_where('tb_user',['id_user' => $this->session->userdata('id_user')])->row_array();
         $data['getjoin'] = $this->peserta_model->getIdVerif2($id_user)->row_array();
@@ -879,6 +934,7 @@ class Peserta extends CI_Controller {
                     $config['upload_path']      ='./assets/files';
                     $config['allowed_types']    ='jpg|jpeg|png|tiff|jfif';
                     $config['max_size']         = 2073; 
+                    $config['file_name'] = 'paperpitching-'.time();
                     $this->load->library('upload',$config);
                     if(!$this->upload->do_upload('proses_bisnis2_pp')){
                         echo "photo gagal diupload!";
@@ -889,6 +945,7 @@ class Peserta extends CI_Controller {
                 $tahapan_pp           =$this->input->post('tahapan_pp');
                 $kelebihan_pp         =$this->input->post('kelebihan_pp');
                 $date_added           =$this->input->post('date_added');
+                $finalisasi           =$this->input->post('finalisasi');
 
 
                 $data=array(
@@ -906,7 +963,8 @@ class Peserta extends CI_Controller {
                 'proses_bisnis2_pp'     =>$proses_bisnis2_pp,
                 'tahapan_pp'            =>$tahapan_pp,
                 'kelebihan_pp'          =>$kelebihan_pp,
-                'date_added'            =>$date_added,
+                'date_added'            =>date("Y-m-d"),
+                'finalisasi'            =>'Belum Finalisasi',
                 
 
             );
@@ -915,9 +973,9 @@ class Peserta extends CI_Controller {
             $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
             Data Berhasil Ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button></div>');
-            redirect('peserta/index_paperpitching/'.$this->session->id_proposal);
+            redirect('peserta/index_proposal/',$data);
         }
-    }
+    } 
 
     public function edit_paperpitching(){
         $id_user=$this->session->userdata('id_user');
@@ -942,7 +1000,7 @@ class Peserta extends CI_Controller {
             $this->load->view('templates_peserta/header', $data);
             $this->load->view('templates_peserta/sidebar', $data);
             $this->load->view('templates_peserta/topbar', $data);
-            $this->load->view('peserta/index_startup', $data);
+            $this->load->view('peserta/index_paperpitching', $data);
             $this->load->view('templates_peserta/footer');
             
         }else{
@@ -961,6 +1019,7 @@ class Peserta extends CI_Controller {
                 $config['upload_path']      ='./assets/files';
                 $config['allowed_types']    ='jpg|jpeg|png|tiff|jfif';
                 $config['max_size']         = 2073; 
+                $config['file_name'] = 'paperpitching-'.time();
                 $this->load->library('upload',$config);
                 if(!$this->upload->do_upload('proses_bisnis2_pp')){
                     echo "photo gagal diupload!";
@@ -987,7 +1046,7 @@ class Peserta extends CI_Controller {
             'proses_bisnis2_pp'     =>$proses_bisnis2_pp,
             'tahapan_pp'            =>$tahapan_pp,
             'kelebihan_pp'          =>$kelebihan_pp,
-            'date_updated'          =>$date_updated,
+            'date_updated'          =>date("Y-m-d"),
         );
 
         $where=array(
@@ -998,7 +1057,7 @@ class Peserta extends CI_Controller {
         $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
         Data Berhasil Diedit <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span></button></div>');
-        redirect('peserta/index_paperpitching/', $data);
+        redirect('peserta/index_proposal/', $data);
         }
     }
 
@@ -1050,7 +1109,7 @@ class Peserta extends CI_Controller {
             $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
             Data Berhasil Ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button></div>');
-            redirect('peserta/index_bisnisplan/'.$this->session->id_proposal);
+            redirect('peserta/index_proposal/'.$id_proposal,$data);
         }
       
     }
@@ -1081,6 +1140,7 @@ class Peserta extends CI_Controller {
             $this->load->view('templates_peserta/footer');
             
         }else{
+            $id_user          = $this->session->id_user;
             $id_proposal          = $this->session->id_proposal;
             $cust_plan        =$this->input->post('cust_plan');
             $value_plan       =$this->input->post('value_plan');
@@ -1094,6 +1154,7 @@ class Peserta extends CI_Controller {
             $date_updated     =$this->input->post('date_updated');
 
         $data=array(
+           
             'cust_plan'        =>$cust_plan,
             'value_plan'       =>$value_plan,
             'channels_plan'    =>$channels_plan,
@@ -1103,20 +1164,20 @@ class Peserta extends CI_Controller {
             'key_partner_plan' =>$key_partner_plan,
             'cost_plan'        =>$cost_plan,
             'revenue_plan'     =>$revenue_plan,
-            'date_updated'     =>$date_updated,
+            'date_updated'     =>date("Y-m-d"),
 
         );
 
         $where=array(
             'id_user'=>$id_user,
-            'id_proposal'=>$id_proposal,
+           
         );
 
         $this->peserta_model->update_data($where,$data,'tb_plan');
         $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
         Data Berhasil Diedit <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span></button></div>');
-        redirect('peserta/index_bisnisplan/'.$id_proposal, $data);
+        redirect('peserta/index_proposal/', $data);
         }
     }
 
@@ -1160,6 +1221,7 @@ class Peserta extends CI_Controller {
             $id_proposal          = $this->session->id_proposal;
             $uraian_singkat       =$this->input->post('uraian_singkat');
             $file_pitchd          =$_FILES['file_pitchd']['name'];
+            $config['file_name'] = 'presentasi-'.time();
             if($file_pitchd!=''){
                 $config['overwrite']        = TRUE;
                 $config['upload_path']      ='./assets/files';
@@ -1172,6 +1234,7 @@ class Peserta extends CI_Controller {
                 }
             }
             $date_added           =$this->input->post('date_added');
+            $finalisasi           =$this->input->post('finalisasi');
 
 
             $data=array(
@@ -1179,7 +1242,8 @@ class Peserta extends CI_Controller {
             'id_proposal'        =>$id_proposal,
             'uraian_singkat'     =>$uraian_singkat,
             'file_pitchd'        =>$file_pitchd,
-            'date_added'         =>$date_added,
+            'date_added'         =>date("Y-m-d"),
+            'finalisasi'         =>'Belum Finalisasi',
 
              );
         
@@ -1187,7 +1251,7 @@ class Peserta extends CI_Controller {
             $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
             Data Berhasil Ditambahkan <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button></div>');
-            redirect('peserta/index_pitchdesk/'.$this->session->id_proposal, $data);
+            redirect('peserta/index_proposal/'.$id_proposal, $data);
         }
       
     }
@@ -1216,7 +1280,8 @@ class Peserta extends CI_Controller {
             if($file_pitchd!=''){
                 $config['overwrite']        = TRUE;
                 $config['upload_path']      ='./assets/files';
-                $config['max_size']         = 2073; 
+                $config['allowed_types']    ='pdf';
+                $config['file_name'] = 'presentasi-'.time();
                 $this->load->library('upload',$config);
                 if(!$this->upload->do_upload('file_pitchd')){
                     echo "gagal diupload!";
@@ -1243,7 +1308,7 @@ class Peserta extends CI_Controller {
         $this->session->set_flashdata('message','<div class="alert alert-success alert-dismissible fade show" role="alert">
         Data Berhasil Diedit <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span></button></div>');
-        redirect('peserta/index_pitchdesk/', $data);
+        redirect('peserta/index_proposal/', $data);
         }
     }
 
